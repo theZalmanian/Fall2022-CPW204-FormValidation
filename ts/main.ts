@@ -3,6 +3,42 @@ window.onload = function():void {
     setupButton("register", main);
 }
 
+/** 
+ * This function is called when the register button is clicked,
+ * and validates the form.
+*/
+function main():void {
+    // validate first name
+    validateIfEmpty("first-name", "First name is required!");
+
+    // validate last name
+    validateIfEmpty("last-name", "Last name is required!");
+}
+
+/**
+ * Returns true if the text box passed through has text inside it,
+ * returns false if text box is empty
+ * @param id The textbox's id
+ * @param errorMessage The corresponding error message
+ * @returns 
+ */
+ function validateIfEmpty(id:string, errorMessage:string):boolean {
+    // grab textbox by id
+    let textBox = <HTMLInputElement>getByID(id);
+    // get textbox value
+    let textBoxValue:string = textBox.value;
+
+    // if text box is empty, show corresponding error
+    if (textBoxValue == "") {
+        displayError(textBox, errorMessage);
+        return false;
+    }
+
+    else {
+        return true;
+    }
+}
+
 /**
  * Shortened form of the document.getElementById method
  * @param {string} id - The element's id.
@@ -22,6 +58,12 @@ window.onload = function():void {
     button.onclick = useFunction;
 }
 
-function main():void {
-    alert("Test");
+/**
+ * Displays an error message through a span
+ * @param {HTMLInputElement} inputElement The input element containing an invalid entry.
+ * @param errorMessage The corresponding error message
+ */
+ function displayError(inputElement:HTMLInputElement, errorMessage:string):void  { 
+    // grab associated span and display error
+    inputElement.nextElementSibling.innerHTML = errorMessage;
 }
