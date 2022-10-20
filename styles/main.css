@@ -61,5 +61,5 @@ input[type="button"]:hover {
 }
 
 span {
-	color: var(--secondaryColor);
+	color: rgb(22, 222, 212);
 }
