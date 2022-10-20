@@ -1,26 +1,28 @@
 /* Styling the page */
 :root {
-    --primaryColor: #efaf37;
-    --secondaryColor: #9a5b23;
+    --primaryColor: #e59d29;
+    --secondaryColor: #18a8a1;
+    --backgroundColor: #002b36;
 }
 
 body {
+    background: var(--backgroundColor);
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(90deg, #002b36 0%, #1a3a6d 100%);
-    font-weight: bold;
     font-size: large;
+    font-weight: bold;
 }
 
 form {
-    width: 38.5em;
+    width: 36em;
     padding: 1em 1em;
     margin: 0 auto;
-    border: 3px solid var(--primaryColor);
     color: var(--primaryColor);
+    border: 3px solid var(--secondaryColor);
 }
 
 h1 {
-	margin-top: 0;
+	margin-top: .5em;
+    margin-bottom: .3em;
     text-align: center;
     color: var(--primaryColor);
 }
@@ -33,33 +35,47 @@ label {
 
 input {
     width: 11em;   
-    margin-left: 1em;
-	margin-right: .5em;
-    margin-bottom: .5em;
+    height: 1.5em;
+    margin: 0 .5em .5em 1em;
     font-weight: bold;
     background: var(--primaryColor);
-    color: var(--secondaryColor);
-    border: none;
+    color: var(--backgroundColor);
+    border: 1px solid var(--backgroundColor);
 }
 
 input[type="button"] {
-    width: 10em;   
-    height: 1.7em;
+    width: 8em;   
+    height: 2.5em;
     display: block;
     margin: auto;
     background: none;
     transition: all .2s;
-    color: var(--primaryColor);
-    border: 3px solid var(--primaryColor);
+    color: var(--secondaryColor);
+    border: 3px solid var(--secondaryColor);
     border-radius: .7em;
 }
 
 input[type="button"]:hover {
     cursor: pointer;
-    background: var(--primaryColor);
-    color: var(--secondaryColor);
+    background: var(--secondaryColor);
+    color: var(--backgroundColor);
 }
 
 span {
-	color: rgb(22, 222, 212);
+	color: var(--secondaryColor);
+}
+
+/* For phones */
+@media only screen and (max-width: 667px) {
+    form {
+        width: 80%;
+    }  
+
+    label {
+        float: none;
+    }  
+
+    span {
+        display: inline-block;
+    }
 }
