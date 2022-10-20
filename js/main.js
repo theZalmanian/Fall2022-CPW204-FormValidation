@@ -2,8 +2,10 @@ window.onload = function () {
     setupButton("register", main);
 };
 function main() {
+    resetAllErrorSpans();
     validateIfEmpty("first-name", "First name is required!");
     validateIfEmpty("last-name", "Last name is required!");
+    validateIfEmpty("dob", "Date of Birth is required!");
 }
 function validateIfEmpty(id, errorMessage) {
     var textBox = getByID(id);
@@ -25,4 +27,16 @@ function setupButton(id, useFunction) {
 }
 function displayError(inputElement, errorMessage) {
     inputElement.nextElementSibling.innerHTML = errorMessage;
+}
+function resetAllErrorSpans() {
+    var allErrorSpans = document.querySelectorAll("span");
+    for (var i = 0; i < allErrorSpans.length; i++) {
+        var currentSpan = allErrorSpans[i];
+        if (currentSpan.hasAttribute("data-required")) {
+            currentSpan.innerHTML = "*";
+        }
+        else {
+            currentSpan.innerHTML = "";
+        }
+    }
 }

@@ -4,15 +4,21 @@ window.onload = function():void {
 }
 
 /** 
- * This function is called when the register button is clicked,
+ * This function is called when the register button is clicked, 
  * and validates the form.
 */
 function main():void {
+    // reset all previous errors
+    resetAllErrorSpans();
+
     // validate first name
     validateIfEmpty("first-name", "First name is required!");
 
     // validate last name
     validateIfEmpty("last-name", "Last name is required!");
+
+    // validate date of birth
+    validateIfEmpty("dob", "Date of Birth is required!");
 }
 
 /**
@@ -66,4 +72,27 @@ function main():void {
  function displayError(inputElement:HTMLInputElement, errorMessage:string):void  { 
     // grab associated span and display error
     inputElement.nextElementSibling.innerHTML = errorMessage;
+}
+
+/**
+ * Clears out all previous errors
+ */
+ function resetAllErrorSpans():void {
+    // get all error spans
+    let allErrorSpans:NodeListOf<HTMLSpanElement> = document.querySelectorAll("span");
+
+    // reset all error spans
+    for (let i:number = 0; i < allErrorSpans.length; i++) {
+        // get individual span
+        let currentSpan:HTMLSpanElement = allErrorSpans[i];
+
+        // if required error span reset value to asterisk
+        if(currentSpan.hasAttribute("data-required")) {
+            currentSpan.innerHTML = "*";
+        }
+        // otherwise reset value to empty
+        else {
+            currentSpan.innerHTML = "";
+        }
+    }
 }
