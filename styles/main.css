@@ -7,8 +7,11 @@
 
 body {
     background: var(--backgroundColor);
-    font-family: 'Raleway', Arial, Helvetica, sans-serif;
     font-size: large;
+}
+
+body, input, input[type="button"] {
+    font-family: 'Raleway', Arial, Helvetica, sans-serif; 
 }
 
 h1 {
@@ -39,7 +42,6 @@ input {
     width: 11em;   
     height: 1.5em;
     margin: 0 .5em .5em 1em;
-    font-weight: bold;
     background: var(--primaryColor);
     color: var(--backgroundColor);
     border: 1px solid var(--backgroundColor);
@@ -57,7 +59,6 @@ input[type="button"] {
     transition: all .2s;
     color: var(--secondaryColor);
     border: 3px solid var(--secondaryColor);
-    font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
 input[type="button"]:hover {
