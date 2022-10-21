@@ -12,34 +12,66 @@ function main():void {
     resetAllErrorSpans();
 
     // validate first name
-    validateIfEmpty("first-name", "First name is required!");
+    validateHasText("first-name", "First name is required!");
 
     // validate last name
-    validateIfEmpty("last-name", "Last name is required!");
+    validateHasText("last-name", "Last name is required!");
 
     // validate date of birth
-    validateIfEmpty("dob", "Date of Birth is required!");
+    let dateHasText = validateHasText("dob", "Date of Birth is required!")
+    if(dateHasText == true) {
+        validateIsDate("dob", "Please enter as mm/dd/yyyy");
+    }
 }
 
 /**
- * Returns true if the text box passed through has text inside it,
- * returns false if text box is empty
+ * Returns true if the textbox contains text,
+ * returns false if textbox is empty
  * @param id The textbox's id
  * @param errorMessage The corresponding error message
- * @returns 
+ * @returns If the texbox contains text
  */
- function validateIfEmpty(id:string, errorMessage:string):boolean {
+ function validateHasText(id:string, errorMessage:string):boolean {
     // grab textbox by id
     let textBox = <HTMLInputElement>getByID(id);
     // get textbox value
     let textBoxValue:string = textBox.value;
 
-    // if text box is empty, show corresponding error
+    // if textbox is empty, show corresponding error
     if (textBoxValue == "") {
         displayError(textBox, errorMessage);
         return false;
     }
+    else {
+        return true;
+    }
+}
 
+/**
+ * Returns true if the date entered is formatted correctly,
+ * otherwise returns false.
+ * @param id The textbox's id
+ * @param errorMessage The corresponding error message
+ * @returns If the entered date is a valid date
+ */
+function validateIsDate(id:string, errorMessage:string):boolean {
+    // grab textbox by id
+    let textBox = <HTMLInputElement>getByID(id);
+    // get textbox value
+    let textBoxValue:string = textBox.value;
+    
+    // setup regular expression for validation
+    // mm/dd/yyyy or m/d/yyyy
+    let dateFormat = /^\d{1,2}\/\d{1,2}\/\d{4}$/g
+
+    // test if user input matches proper formatting
+    let isDate = dateFormat.test(textBoxValue);
+
+    // if formatting is incorrect, show corresponding error
+    if (isDate == false) {
+        displayError(textBox, errorMessage);
+        return false;
+    }
     else {
         return true;
     }

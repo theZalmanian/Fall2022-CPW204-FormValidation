@@ -3,14 +3,30 @@ window.onload = function () {
 };
 function main() {
     resetAllErrorSpans();
-    validateIfEmpty("first-name", "First name is required!");
-    validateIfEmpty("last-name", "Last name is required!");
-    validateIfEmpty("dob", "Date of Birth is required!");
+    validateHasText("first-name", "First name is required!");
+    validateHasText("last-name", "Last name is required!");
+    var dateHasText = validateHasText("dob", "Date of Birth is required!");
+    if (dateHasText == true) {
+        validateIsDate("dob", "Please enter as mm/dd/yyyy");
+    }
 }
-function validateIfEmpty(id, errorMessage) {
+function validateHasText(id, errorMessage) {
     var textBox = getByID(id);
     var textBoxValue = textBox.value;
     if (textBoxValue == "") {
+        displayError(textBox, errorMessage);
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+function validateIsDate(id, errorMessage) {
+    var textBox = getByID(id);
+    var textBoxValue = textBox.value;
+    var dateFormat = /^\d{1,2}\/\d{1,2}\/\d{4}$/g;
+    var isDate = dateFormat.test(textBoxValue);
+    if (isDate == false) {
         displayError(textBox, errorMessage);
         return false;
     }
