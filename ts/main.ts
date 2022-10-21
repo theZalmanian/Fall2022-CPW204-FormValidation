@@ -12,17 +12,44 @@ function main():void {
     resetAllErrorSpans();
 
     // validate first name
-    validateHasText("first-name", "First name is required!");
+    let firstNameValid = validateHasText("first-name", "First name is required!");
 
     // validate last name
-    validateHasText("last-name", "Last name is required!");
+    let lastNameValid = validateHasText("last-name", "Last name is required!");
 
     // validate date of birth
-    let dateHasText = validateHasText("dob", "Date of Birth is required!")
-    if(dateHasText == true) {
-        validateIsDate("dob", "Please enter as mm/dd/yyyy");
+    let dobValid = validateIsDate("dob", "Please enter as mm/dd/yyyy");
+
+    // if all fields are valid, display message
+    if(firstNameValid && lastNameValid && dobValid) {
+        createMessage("h2", "Thank you for registering!", 3000);
     }
 }
+
+/**
+ * Creates an HTML Element and displays a message within it for
+ * the time allotted, after which the message is removed.
+ * @param element The HTML Element type being added
+ * @param message The message to be displayed
+ */
+function createMessage(element:string, message:string, messageTime:number):void {
+    // create message
+    let messageHeading:HTMLElement = document.createElement(element);
+    // set message's class
+    messageHeading.setAttribute("class", "message")
+    // set message text
+    messageHeading.innerText = message;
+
+    // grab form
+    let registrationForm:HTMLElement = getByID("registration-form");
+    // set message after form
+    registrationForm.insertAdjacentElement("afterend", messageHeading);
+
+    // removes message after set seconds
+    setTimeout( function() {
+        messageHeading.remove();
+    }, messageTime )
+} 
 
 /**
  * Returns true if the textbox contains text,
@@ -55,25 +82,31 @@ function main():void {
  * @returns If the entered date is a valid date
  */
 function validateIsDate(id:string, errorMessage:string):boolean {
-    // grab textbox by id
-    let textBox = <HTMLInputElement>getByID(id);
-    // get textbox value
-    let textBoxValue:string = textBox.value;
-    
-    // setup regular expression for validation
-    // mm/dd/yyyy or m/d/yyyy
-    let dateFormat = /^\d{1,2}\/\d{1,2}\/\d{4}$/g
+    // check if dob has been entered
+    let dateHasText = validateHasText("dob", "Date of Birth is required!");
 
-    // test if user input matches proper formatting
-    let isDate = dateFormat.test(textBoxValue);
+    // if dob textbox has text, validate dob
+    if(dateHasText == true) {
+        // grab textbox by id
+        let textBox = <HTMLInputElement>getByID(id);
+        // get textbox value
+        let textBoxValue:string = textBox.value;
+        
+        // setup regular expression for validation
+        // mm/dd/yyyy or m/d/yyyy
+        let dateFormat = /^\d{1,2}\/\d{1,2}\/\d{4}$/g;
 
-    // if formatting is incorrect, show corresponding error
-    if (isDate == false) {
-        displayError(textBox, errorMessage);
-        return false;
-    }
-    else {
-        return true;
+        // test if user input matches proper formatting
+        let isDate = dateFormat.test(textBoxValue);
+
+        // if formatting is incorrect, show corresponding error
+        if (isDate == false) {
+            displayError(textBox, errorMessage);
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }
 
