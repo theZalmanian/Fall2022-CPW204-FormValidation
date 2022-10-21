@@ -7,24 +7,26 @@
 
 body {
     background: var(--backgroundColor);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
     font-size: large;
-    font-weight: bold;
+}
+
+h1 {
+    margin: .5em 0 .3em 0;
+    text-align: center;
+    color: var(--primaryColor);
 }
 
 form {
     width: 36em;
     padding: 1em 1em;
-    margin: 0 auto;
     color: var(--primaryColor);
     border: 3px solid var(--secondaryColor);
 }
 
-h1 {
-	margin-top: .5em;
-    margin-bottom: .3em;
-    text-align: center;
-    color: var(--primaryColor);
+form, input[type="button"] {
+    margin: auto;
+    border-radius: 1em;
 }
 
 label {
@@ -43,26 +45,24 @@ input {
     border: 1px solid var(--backgroundColor);
 }
 
+span {
+	color: var(--secondaryColor);
+}
+
 input[type="button"] {
     width: 8em;   
     height: 2.5em;
     display: block;
-    margin: auto;
     background: none;
     transition: all .2s;
     color: var(--secondaryColor);
     border: 3px solid var(--secondaryColor);
-    border-radius: .7em;
 }
 
 input[type="button"]:hover {
     cursor: pointer;
     background: var(--secondaryColor);
     color: var(--backgroundColor);
-}
-
-span {
-	color: var(--secondaryColor);
 }
 
 /* For phones */
