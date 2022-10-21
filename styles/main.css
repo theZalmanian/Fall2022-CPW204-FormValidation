@@ -57,6 +57,7 @@ input[type="button"] {
     transition: all .2s;
     color: var(--secondaryColor);
     border: 3px solid var(--secondaryColor);
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
 input[type="button"]:hover {
